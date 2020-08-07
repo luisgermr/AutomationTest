@@ -49,7 +49,7 @@ namespace Examples.System.Net
             }
             catch (WebException e)
             {
-                Console.WriteLine("This test is expected to throw a Exception on successful." +
+                Console.WriteLine("This test is expected to throw a Exception." +
                                     "\n\nException Message :" + e.Message);
                 if (e.Status == WebExceptionStatus.ProtocolError)
                 {

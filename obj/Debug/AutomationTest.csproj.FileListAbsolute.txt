@@ -1,0 +1,7 @@
+C:\Users\luisg\Documents\Automation Test\AutomationTest\bin\Debug\ConsoleApp1.exe.config
+C:\Users\luisg\Documents\Automation Test\AutomationTest\bin\Debug\ConsoleApp1.exe
+C:\Users\luisg\Documents\Automation Test\AutomationTest\bin\Debug\ConsoleApp1.pdb
+C:\Users\luisg\Documents\Automation Test\AutomationTest\obj\Debug\AutomationTest.csprojAssemblyReference.cache
+C:\Users\luisg\Documents\Automation Test\AutomationTest\obj\Debug\AutomationTest.csproj.CoreCompileInputs.cache
+C:\Users\luisg\Documents\Automation Test\AutomationTest\obj\Debug\ConsoleApp1.exe
+C:\Users\luisg\Documents\Automation Test\AutomationTest\obj\Debug\ConsoleApp1.pdb
