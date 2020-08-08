@@ -13,9 +13,14 @@ namespace Examples.System.Net
         {
             try
             {
+                //This lines creates the request and response obtained from the request.
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://restcountries.eu/rest/v2/alpha/"+ alpha2Code);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                //This line print the status code of the response
                 Console.WriteLine(((HttpWebResponse)response).StatusCode);
+
+                //This lines read the data obtained from the request and print it.
                 using (Stream dataStream = response.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(dataStream);
@@ -26,6 +31,7 @@ namespace Examples.System.Net
             }
             catch (WebException e)
             {
+                // In case the function got an exception, shows a message to the tester indicating that something went wrong. Also show the Status Code and Description.
                 Console.WriteLine("This test is expected to be successful, must be reported if got an exception." +
                                     "\n\nException Message :" + e.Message);
                 if (e.Status == WebExceptionStatus.ProtocolError)
@@ -42,13 +48,26 @@ namespace Examples.System.Net
         {
             try
             {
+                //This lines creates the request and response obtained from the request.
                 HttpWebRequest badRequest = (HttpWebRequest)WebRequest.Create("https://restcountries.eu/rest/v2/alpha/"+ alpha2Code);
                 HttpWebResponse badResponse = (HttpWebResponse)badRequest.GetResponse();
-                Console.WriteLine(((HttpWebResponse)badResponse).StatusDescription);
+
+                //This line print the status code of the response
+                Console.WriteLine(((HttpWebResponse)badResponse).StatusCode);
+
+                //This lines read the data obtained from the request and print it.
+                using (Stream dataStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(dataStream);
+                    string responseFromServer = reader.ReadToEnd();
+                    Console.WriteLine(responseFromServer);
+                }
+
                 badResponse.Close();
             }
             catch (WebException e)
             {
+                // In case the function got an exception, shows a message to the tester indicating that something went wrong. Also show the Status Code and Description.
                 Console.WriteLine("This test is expected to throw a Exception." +
                                     "\n\nException Message :" + e.Message);
                 if (e.Status == WebExceptionStatus.ProtocolError)
@@ -57,36 +76,31 @@ namespace Examples.System.Net
                     Console.WriteLine("Status Description : {0}", ((HttpWebResponse)e.Response).StatusDescription);
                 }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
             Console.WriteLine("------------------------------------------------------------------");
         }
 
         static void Post()
         {
-            //var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://restcountries.eu/rest/v2/alpha/post");
-            //httpWebRequest.ContentType = "application/json";
-            //httpWebRequest.Method = "POST";
-            //
-            //using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            //{
-            //    string json = new JavaScriptSerializer().Serialize(new
-            //    {
-            //            name = "Test Country", 
-            //            alpha2_code= "TC", 
-            //            alpha3_code= "TCY"
-            //    });
-            //
-            //    streamWriter.Write(json);
-            //}
-            //
-            //var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            //{
-            //    var result = streamReader.ReadToEnd();
-            //}
+            //This lines create the post request and specifies that the content type to use is json.
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://restcountries.eu/rest/v2/alpha/post");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            //This lines create the json to post.
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                 string json = "{\"name\":\"Test Country\"," +
+                                  "\"alpha2code\":\"TC\"," + 
+                                  "\"alpha3code\":\"TCY\"}";
+            streamWriter.Write(json);
+            }
+            
+            //This lines should show the response result of the request.
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
         }
         public static void Main()
         {
@@ -104,9 +118,8 @@ namespace Examples.System.Net
 
             
             Console.WriteLine("");
-            Console.WriteLine("Third Test Scenario: Simulating Post method (read the code)");
+            Console.WriteLine("Third Test Scenario: Simulated Post method (read the comment code)");
             Console.WriteLine("");
-
             //Post();
 
             Console.ReadKey();
