@@ -56,7 +56,7 @@ namespace Examples.System.Net
                 Console.WriteLine(((HttpWebResponse)badResponse).StatusCode);
 
                 //This lines read the data obtained from the request and print it.
-                using (Stream dataStream = response.GetResponseStream())
+                using (Stream dataStream = badResponse.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(dataStream);
                     string responseFromServer = reader.ReadToEnd();
